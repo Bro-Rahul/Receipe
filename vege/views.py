@@ -20,13 +20,9 @@ def receipes(request):
     receipe_image = request.FILES.get('receipe_image')
     receipe_name = data.get('receipe_name')
     receipe_description = data.get('receipe_description')
-
-    '''
-    print(receipe_name)
-    print(receipe_description)
-    print(receipe_image) '''
     
     Receipe.objects.create(
+      user = request.user,
       receipe_name = receipe_name,
       receipe_description = receipe_description,
       receipe_image = receipe_image,
@@ -40,7 +36,7 @@ def receipes(request):
     queryset = queryset.filter(receipe_name__icontains = request.GET.get('search'))
 
 
-  context = {'receipes':queryset}
+  context = {'receipes':queryset,'user' : request.user.id}
   return render(request,'receipes.html',context)
 
 

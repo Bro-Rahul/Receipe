@@ -89,8 +89,10 @@
           <td>{{receipe.receipe_name}}</td>
           <td>{{receipe.receipe_description}}</td>
           <td><img src="{{ receipe.receipe_image.url}}" style="height: 100px;" alt="{{receipe_name}}"></td>
-          <td><a href="/delete-receipe/{{receipe.id}}/" class="btn btn-danger">Delete</a></td>
-          <td><a href="/update-receipe/{{receipe.id}}/" class="btn btn-success">Update</a></td>
+          {% if receipe.user_id == user %}
+            <td><a href="/delete-receipe/{{receipe.id}}/" class="btn btn-danger">Delete</a></td>
+            <td><a href="/update-receipe/{{receipe.id}}/" class="btn btn-success">Update</a></td>
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>
